@@ -3,9 +3,9 @@ from PIL import Image
 import io
 import random
 from CLAHE import clahe_imagen
-from ecualizacion_en_subregiones import mejorar_imagen_con_ecualizacion_en_subregiones
 from ecualizacion_de_histograma import ecualizacion
 from Metricas import calculate_ambe,calculate_contrast,calculate_entropy,calculate_psnr
+from subregiones import sub_regions_histogram_equalization
 import cv2
 import numpy as np
 archivo_zip = 'Dataset_from_fundus_images_for_the_study_of_diabetic_retinopathy_V02.zip'
@@ -24,7 +24,9 @@ with zipfile.ZipFile(archivo_zip, 'r') as archivo_zip:
                 image_gray = cv2.imdecode(imagen_np, cv2.IMREAD_GRAYSCALE)   
                 clahe_imagen(image_gray)        
                 ecualizacion(image_gray)
-                imagen_mejorada = mejorar_imagen_con_ecualizacion_en_subregiones(image_gray)
+                filter_size = 5 
+                sigma = 1.5     
+                imagen_mejorada = sub_regions_histogram_equalization(image_gray, filter_size, sigma)
                 cv2.namedWindow('Imagen Original', cv2.WINDOW_NORMAL)
                 cv2.namedWindow('Imagen Mejorada con Ecualización en Subregiones', cv2.WINDOW_NORMAL)
                 cv2.imshow('Imagen Original', image_gray)
