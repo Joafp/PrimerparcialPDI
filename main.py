@@ -5,6 +5,7 @@ import random
 from CLAHE import clahe_imagen
 from ecualizacion_en_subregiones import mejorar_imagen_con_ecualizacion_en_subregiones
 from ecualizacion_de_histograma import ecualizacion
+from Metricas import calculate_ambe,calculate_contrast,calculate_entropy,calculate_psnr
 import cv2
 import numpy as np
 archivo_zip = 'Dataset_from_fundus_images_for_the_study_of_diabetic_retinopathy_V02.zip'
@@ -30,6 +31,14 @@ with zipfile.ZipFile(archivo_zip, 'r') as archivo_zip:
                 cv2.imshow('Imagen Mejorada con Ecualización en Subregiones', imagen_mejorada)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
+                ambe = calculate_ambe(image_gray, imagen_mejorada)
+                psnr = calculate_psnr(image_gray, imagen_mejorada)
+                entropy_image1 = calculate_entropy(imagen_mejorada)
+                contrast_image1 = calculate_contrast(imagen_mejorada)
+                print(f"AMBE para imagen con subregiones: {ambe}")
+                print(f"PSNR para imagen con subregiones: {psnr}")
+                print(f"Entropía (Imagen subregiones): {entropy_image1}")
+                print(f"Contraste (Imagen subregiones): {contrast_image1}")
         else:
             print(f"No se encontraron imágenes en la carpeta '{nombre_carpeta}'.")
     else:
