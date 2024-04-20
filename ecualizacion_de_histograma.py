@@ -14,6 +14,8 @@ def ecualizacion(image_gray):
         cv2.imshow('Imagen Ecualizada', image_equalized)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
+        ruta_guardado = 'imagen_eq.jpg'
+        cv2.imwrite(ruta_guardado, image_equalized)
         ambe = calculate_ambe(image_gray, image_equalized)
         psnr = calculate_psnr(image_gray, image_equalized)
         entropy_image1 = calculate_entropy(image_equalized)

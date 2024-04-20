@@ -9,6 +9,8 @@ def clahe_imagen(image_gray):
         clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8,8))
         # Aplicar CLAHE a la imagen en escala de grises
         image_clahe = clahe.apply(image_gray)
+        ruta_guardado = 'imagen_clahe.jpg'
+        cv2.imwrite(ruta_guardado, image_clahe)
         cv2.namedWindow('Imagen Original', cv2.WINDOW_NORMAL)
         cv2.namedWindow('CLAHE', cv2.WINDOW_NORMAL)
         cv2.imshow('Imagen Original', image_gray)
