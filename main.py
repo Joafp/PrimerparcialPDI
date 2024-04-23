@@ -33,8 +33,10 @@ with zipfile.ZipFile(archivo_zip, 'r') as archivo_zip:
                 cv2.imshow('Imagen Original', imagen_unida)
                 cv2.waitKey(0)
                 cv2.destroyAllWindows()
+                ruta_guardado2 = 'imagen_original.jpg'
                 ruta_guardado = 'imagen_unida.jpg'
                 cv2.imwrite(ruta_guardado, imagen_unida)
+                cv2.imwrite(ruta_guardado2, image_gray)
                 ambe = calculate_ambe(image_gray, imagen_unida)
                 psnr = calculate_psnr(image_gray, imagen_unida)
                 entropy_image1 = calculate_entropy(imagen_unida)
